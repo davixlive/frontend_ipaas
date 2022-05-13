@@ -5,25 +5,25 @@ void main() {
   runApp(MyApp());
 }
 
+// Declaration of the object MyApp
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Ipaas',
-      /* theme: ThemeData(
-        primarySwatch: Colors.black,
-      ),*/
       home: MyHomePage(),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner:
+          false, // use it for delete the banner "debug" when application is running
     );
   }
 }
 
+//Declaration of the object MyHomePage as StatefulWidget
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState(); //
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -36,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SideMenu(
+            // declaration of the side menu as the children of the scaffold
             controller: page,
             style: SideMenuStyle(
               displayMode: SideMenuDisplayMode.auto,
@@ -43,14 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
               selectedColor: Colors.lightBlue,
               selectedTitleTextStyle: TextStyle(color: Colors.white),
               selectedIconColor: Colors.white,
-              // decoration: BoxDecoration(
-              //   borderRadius: BorderRadius.all(Radius.circular(10)),
-              // ),
-              // backgroundColor: Colors.blueGrey[700]
             ),
             title: Column(
               children: [
                 ConstrainedBox(
+                  // A widget that imposes additional constraints on its child.
                   constraints: BoxConstraints(
                     maxHeight: 150,
                     maxWidth: 150,
@@ -112,6 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           Expanded(
+            // actions that happened when a SideMenuItem is pressed
             child: PageView(
               controller: page,
               children: [

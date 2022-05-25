@@ -1,6 +1,14 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 
+class Tokens {
+  late final String accesToken =
+      "ItXX9gfdrMUBoiPc1Qb0UWbRmtj8ckDH2lDn0MoeeB80FY9Ydd8Vpr7LIEbMslPg";
+  late final String refreshToken =
+      "UqWXkI4DS1aa5SPCVbCQIeUqno02CNH7S2H1F7j8H9gOHYQg50Vdh7V419EsBgLC";
+  late final int userID = 19443;
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 

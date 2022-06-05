@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Ipaas',
-      home: Login(),
+      home: FormNewApplication(),
       debugShowCheckedModeBanner:
           false, // use it for delete the banner "debug" when application is running
     );

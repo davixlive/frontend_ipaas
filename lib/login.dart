@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'dart:html' as html;
 import 'package:http/http.dart' as http;
 
-var request = http.Request('GET', Uri.parse('localhost:8080/api/oauth'));
+var request = http.Request('GET', Uri.parse('http://127.0.0.1:8080/api/oauth'));
 
 Future fetchRedirectMessageLogin() async {
   http.StreamedResponse response = await request.send();
-
+  String string = await response.stream.bytesToString();
   if (response.statusCode == 200) {
-    print(await response.stream.bytesToString());
+    RedirectMessage redirectMessage =
+        RedirectMessage.fromJson(jsonDecode(string));
+    html.window.open(redirectMessage.message, 'this_tab');
   } else {
     print(response.reasonPhrase);
   }
-  // Use the compute function to run parsePhotos in a separate isolate.
-  //return redirectMessage;
 }
 
 class RedirectMessage {
@@ -25,12 +25,12 @@ class RedirectMessage {
 
   const RedirectMessage(
       {required this.returncode, required this.message, required this.error});
-  factory RedirectMessage.fromJson(dynamic json) {
+  factory RedirectMessage.fromJson(Map<String, dynamic> json) {
+    final returncode = json['code'] as int;
+    final message = json['msg'] as String;
+    final error = json['error'] as bool;
     return RedirectMessage(
-      returncode: json['code'] as int,
-      message: json['msg'] as String,
-      error: json['error'] as bool,
-    );
+        returncode: returncode, message: message, error: error);
   }
 }
 
@@ -43,13 +43,11 @@ class Login extends StatelessWidget {
       body: Center(
           child: Container(
         child: OutlinedButton(
-          child: Text(
+          child: const Text(
             "Accedi tramite paleoID",
             style: TextStyle(fontSize: 35),
           ),
-          onPressed: () => {
-            //html.window.open("localhost:8080/api/oauth", "_blank")
-          },
+          onPressed: () => {fetchRedirectMessageLogin()},
         ),
       )),
     );

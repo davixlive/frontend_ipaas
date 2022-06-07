@@ -30,6 +30,7 @@ class _FormNewApplicationState extends State<FormNewApplication> {
                   "New application",
                   textAlign: TextAlign.center,
                   textScaleFactor: 5,
+                  style: TextStyle(color: Colors.red),
                   //color: Colors.red,
                 )),
           ),
@@ -38,7 +39,8 @@ class _FormNewApplicationState extends State<FormNewApplication> {
             widthFactor: 0.5,
             child: TextFormField(
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0))),
                 hintText: 'Enter application repo',
               ),
               controller: repoController,
@@ -50,7 +52,8 @@ class _FormNewApplicationState extends State<FormNewApplication> {
             widthFactor: 0.5,
             child: TextFormField(
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0))),
                 labelText: 'Enter github branch',
               ),
               controller: branchController,
@@ -94,10 +97,8 @@ class _FormNewApplicationState extends State<FormNewApplication> {
                   print("Inviato");
                 });
               },
-              child: const Text(
-                'Submit',
-                textScaleFactor: 2,
-              )),
+              child: const Text('Submit',
+                  textScaleFactor: 2, style: TextStyle(color: Colors.red))),
         ],
       ),
     );

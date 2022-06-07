@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 String dropdownValue = 'GO';
 final repoController = TextEditingController();
 final branchController = TextEditingController();
+List<String> languages = ['GO', 'JAVA', 'PHP'];
 
 class FormNewApplication extends StatefulWidget {
   const FormNewApplication({Key? key}) : super(key: key);
@@ -15,61 +16,90 @@ class _FormNewApplicationState extends State<FormNewApplication> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //crossAxisAlignment: CrossAxisAlignment.start,
-        body: Column(
-      children: [
-        ListTile(
-          title: TextFormField(
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter application repo',
-            ),
-            controller: repoController,
+      //crossAxisAlignment: C
+      //rossAxisAlignment.start,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(bottom: 50),
+            child: Title(
+                color: Colors.red,
+                child: const Text(
+                  "New application",
+                  textAlign: TextAlign.center,
+                  textScaleFactor: 5,
+                  //color: Colors.red,
+                )),
           ),
-        ),
-        ListTile(
-          leading: const Icon(Icons.loop_rounded),
-          title: TextFormField(
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Enter github branch',
+          ListTile(
+              title: FractionallySizedBox(
+            widthFactor: 0.5,
+            child: TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter application repo',
+              ),
+              controller: repoController,
             ),
-            controller: branchController,
-          ),
-        ),
-        ListTile(
-            title: DropdownButton<String>(
-          value: dropdownValue,
-          //icon: const Icon(Icons.arrow_downward),
-          elevation: 16,
-          //style: const TextStyle(color: Colors.deepPurple),
-          /*underline: Container(
-            height: 2,
-            color: Colors.deepPurpleAccent,
-          ),*/
-          onChanged: (String? newValue) {
-            setState(() {
-              dropdownValue = newValue!;
-            });
-          },
-          items: <String>['GO', 'JAVA', 'PHP']
-              .map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-        )),
-        TextButton(
-            onPressed: () {
-              setState(() {
-                print(repoController.text.toString());
-                print(branchController.text.toString());
-                print(dropdownValue);
-              });
-            },
-            child: const Text('Submit')),
-      ],
-    ));
+          )),
+          ListTile(
+              //leading: const Icon(Icons.loop_rounded),
+              title: FractionallySizedBox(
+            widthFactor: 0.5,
+            child: TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter github branch',
+              ),
+              controller: branchController,
+            ),
+          )),
+          ListTile(
+              title: FractionallySizedBox(
+                  widthFactor: 0.5,
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    value: dropdownValue,
+                    //icon: const Icon(Icons.arrow_downward),
+                    elevation: 16,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                      });
+                    },
+                    items:
+                        languages.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Center(
+                          child: Text(
+                            value,
+                            //textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ))),
+          OutlinedButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                )),
+              ),
+              onPressed: () {
+                setState(() {
+                  //need to ckeck string
+                  print("Inviato");
+                });
+              },
+              child: const Text(
+                'Submit',
+                textScaleFactor: 2,
+              )),
+        ],
+      ),
+    );
   }
 }
